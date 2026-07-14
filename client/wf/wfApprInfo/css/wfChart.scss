@@ -1,0 +1,184 @@
+/********************画布容器*******************/
+.wf-container {
+  position: relative;
+  padding: 15px;
+}
+
+/****************节点样式*******************/
+/*节点的最外层容器*/
+.wf-node-container {
+  position: absolute;
+  display: flex;
+  width: 200px;
+  height: 70px;
+  //border: 1px solid #E0E3E7;
+  border-radius: 5px;
+  background-color: #ecf8ff;
+  overflow: hidden;
+}
+
+/* 设置移动样式*/
+.wf-node-container:hover {
+  cursor: move;
+}
+
+/*节点激活样式*/
+.wf-node-active {
+  background-color: #F0F7FF;
+  //border: 1px dashed #1879FF;
+}
+
+.wf-node-active1 {
+  background-color: #f4f270;
+  //border: 1px dashed #f9e074;
+}
+
+.wf-node-active2 {
+  background-color: #c3fb6e;
+  //border: 1px dashed #e3f6c5;
+}
+
+.wf-node-active6 {
+  background-color: #eee;
+  //border: 1px dashed #efefef;
+}
+
+.wf-node {
+  display: flex;
+  width: 100%;
+}
+
+/*节点左侧的图标*/
+.wf-node .wf-node-left-ico {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 70px;
+  font-size: 32px;
+  color: #fff;
+  //border-right: 1px solid #E0E3E7;
+  background-color: #1879FF;
+  height: 100%;
+}
+
+.wf-node .wf-node-left-ico .iconfont {
+  font-size: 32px;
+  color: #fff;
+}
+
+.wf-node .wf-node-right {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.wf-node .wf-node-right .header {
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.wf-node .wf-node-right .header .header-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  text-align: center;
+  color: #565758;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 125px;
+}
+
+.wf-node .wf-node-right .header .header-text .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wf-node .wf-node-right .header .header-text .tip {
+  flex-grow: 1;
+}
+
+.wf-node .wf-node-right .header .wf-header-ico {
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wf-node .wf-node-right .header .wf-header-ico .wf-node-left-ico-one {
+  margin-left: 5px;
+  line-height: 16px;
+  margin-top: 2px;
+  color: #397bfe;
+}
+
+.wf-node .main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.wf-node .main .main-inner {
+  color: #565758;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: 125px;
+}
+
+/*节点左侧的图标-下图标样式*/
+.ef-node-left-ico-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 3px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 10px;
+}
+
+/****************jsplump使用*******************/
+.jtk-overlay {
+  cursor: pointer;
+  color: #4A4A4A;
+}
+
+/* 连线中的label 样式*/
+.jtk-overlay.flowLabel:not(.aLabel) {
+  padding: 4px 10px;
+  background-color: white;
+  color: #565758 !important;
+  border: 1px solid #E0E3E7;
+  border-radius: 5px;
+}
+
+.ef-dot {
+  background-color: #1879FF;
+  border-radius: 10px;
+}
+
+.ef-dot-hover {
+  background-color: red;
+}
+
+.ef-rectangle {
+  background-color: #1879FF;
+}
+
+.ef-rectangle-hover {
+  background-color: red;
+}
+
+.ef-drop-hover {
+  border: 1px dashed #1879FF;
+}

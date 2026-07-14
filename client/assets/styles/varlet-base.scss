@@ -1,0 +1,74 @@
+.prepend-icon {
+  margin-right: 2px;
+}
+
+.var-counter {
+  flex-grow: 1;
+}
+
+.var-checkbox__text {
+  padding-right: 5px;
+  font-size: var(--font-size);
+}
+
+.var-radio__text {
+  padding-right: 5px;
+}
+
+.var-field-decorator--standard .var-field-decorator--placeholder-hint {
+  transform: translate(0, 0) scale(1) !important;
+}
+
+.var-field-decorator--standard .var-field-decorator__line:not(.var-field-decorator--line-disabled) {
+  background: #DCDCDC !important;
+}
+
+.var-field-decorator--standard .var-field-decorator--line-disabled {
+  background: #DCDCDC !important;
+}
+
+.var-tabs--item-horizontal {
+  box-shadow: 0 2px 1px -1px var(--shadow-key-umbra-opacity);
+}
+
+.var-button + .var-button {
+  margin-left: 5px;
+}
+
+.var-button-group {
+  .var-button:first-child {
+    padding: 0 15px;
+  }
+
+  .var-button + .var-button {
+    margin-left: 0;
+    padding: 0 15px;
+    border-left: 1px solid #ffffff;
+  }
+}
+
+.var-field-decorator__controller {
+  overflow: visible !important; // 解决左侧小圆点无法显示问题，会影响超长placeholder的截断
+}
+
+.var-field-decorator__placeholder {
+  overflow: visible !important; // 解决左侧小圆点无法显示问题，会影响超长placeholder的截断
+  // &>span:first-child::before{
+  //   content: "";
+  //   position: absolute;
+  //   left: -10px;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  //   width: 5px;
+  //   height: 5px;
+  //   border-radius: 50%;
+  //   background-color: #F5A623;
+  // }
+  &:not(.var-field-decorator--disabled) {
+    color: var(--color-primary);
+  }
+}
+
+.var-pull-refresh {
+  overflow: auto;
+}

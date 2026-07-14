@@ -1,0 +1,119 @@
+//标签
+.main-form-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.main-form-item-label {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  pointer-events: none;
+
+  .label {
+    box-sizing: border-box;
+    line-height: 1.5em;
+    font-size: var(--font-size);
+    color: var(--color-primary);
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #F5A623;
+      position: absolute;
+      left: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .label-disabled {
+    color: var(--field-decorator-placeholder-color);
+  }
+}
+
+.main-form-item-required .main-form-item-label .label::after {
+  content: "*";
+  position: absolute;
+  padding-left: 3px;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  color: #ff4949;
+}
+
+.var-field-decorator__placeholder {
+  & > span:first-child {
+    position: relative;
+  }
+
+  & > span:first-child::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #F5A623;
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.main-form-item-required .var-field-decorator__placeholder {
+  & > span:first-child::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #F5A623;
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  & > span:first-child::after {
+    content: "*";
+    position: absolute;
+    padding-left: 3px;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    color: #ff4949;
+  }
+}
+
+.main-form-label-left-line {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 3px;
+    height: 15px;
+    border-radius: 3px;
+    background-color: #2772FF;
+    margin-right: 5px;
+  }
+}
+
+//输入框下划线
+.main-form-item-border {
+  border-bottom: 1px solid #DCDCDC;
+}
+
+//红色
+.main-required {
+  font-size: var(--font-size);
+  color: #ff4949;
+  margin-left: 5px;
+  transform: scale(1.5);
+  transform-origin: 100% 0;
+}

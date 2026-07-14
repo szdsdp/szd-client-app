@@ -1,0 +1,28 @@
+.var-dialog__title {
+  background-color: #bed9f2;
+}
+
+.var-dialog__popup {
+  width: 90%;
+  max-width: 500px;
+}
+
+.var-dialog {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.var-dialog__message {
+  overflow: auto;
+  flex: 1;
+}
+
+.main-dialog-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid #dcdcdc;
+}

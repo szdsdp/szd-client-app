@@ -1,0 +1,35 @@
+.wf-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5px;
+  position: relative;
+  width: 100%;
+  height: var(--button-normal-height);
+
+
+  .btn_more {
+    width: 80px;
+  }
+
+  .btn_more_view {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    position: absolute;
+    right: 8px;
+    padding: 0 0 10px 10px;
+    top: 35px;
+    z-index: 3100;
+    overflow: auto;
+  }
+
+  .btn_row {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-end;
+
+  }
+
+}
+

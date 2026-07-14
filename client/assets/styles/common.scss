@@ -1,0 +1,104 @@
+// 备注描述
+.main-remark {
+  border-bottom: 1px solid #dfe6ec;
+  border-top: 1px solid #dfe6ec;
+  background-color: #F7F9FC;
+  display: flex;
+  font-size: 14px;
+  margin: 3px 0;
+
+  span {
+    padding: 3px 5px;
+    line-height: 1.5;
+    color: #F5A623;
+  }
+}
+
+
+//按钮菜单
+.main-menu-var-cell {
+  border-bottom: #dfe4ed 1px solid;
+  text-align: center;
+}
+
+//全选
+.main-checkbox-all {
+  display: flex;
+  width: 100%;
+  height: 35px;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+//轮播导航
+.main-swipe-nav {
+  position: absolute;
+  z-index: 9;
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  align-content: center;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #397bfe;
+  top: 45%;
+  font-size: 16px;
+  box-shadow: 0 3px 1px -2px var(--shadow-key-umbra-opacity), 0 2px 2px 0 var(--shadow-key-penumbra-opacity), 0 1px 5px 0 var(--shadow-key-ambient-opacity);
+
+  &.nav-prev {
+    left: 8px;
+  }
+
+  &.nav-next {
+    right: 8px;
+  }
+}
+
+.hp100 {
+  height: 100%;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-no-wrap {
+  flex-wrap: nowrap;
+}
+
+.flex-y {
+  display: flex;
+  flex-direction: column;
+}
+
+.h400 {
+  height: 400px;
+}
+
+.ova {
+  overflow: auto;
+}
+
+.ml5 {
+  margin-left: 5px;
+}
+
+.pl5 {
+  padding-left: 5px;
+}
+
+.ovh {
+  overflow: hidden;
+}
+
+.relative {
+  position: relative;
+}

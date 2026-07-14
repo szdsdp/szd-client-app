@@ -1,0 +1,15 @@
+{
+  "name": "szd-client-app",
+  "version": "2.1.0",
+  "description": "SZD 组件库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/szdsdp/szd-client-app.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

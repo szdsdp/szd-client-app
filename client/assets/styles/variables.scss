@@ -1,0 +1,73 @@
+:root {
+  --font-size: 16px;
+  // --page-bg: #f2f6f7;
+  // --page-bg: #F1F6FF; // 蓝湖页面背景色
+  --page-bg: #ededed; //微信小程序背景色
+}
+
+:root {
+  --hsl-text-disabled: 0, 0%, 50%;
+
+  --dialog-title-padding: 5px 10px;
+  --dialog-title-font-size: var(--font-size);
+  --dialog-message-padding: 0 5px;
+  --dialog-actions-padding: 2px 10px;
+  --dialog-background: var(--page-bg);
+
+  --button-normal-height: 30px;
+  --button-normal-padding: 0 10px;
+  --button-small-padding: 0 10px;
+  --button-mini-font-size: 14px;
+  --button-small-font-size: var(--font-size);
+  --button-normal-font-size: var(--font-size);
+  --button-large-font-size: var(--font-size);
+
+  --field-decorator-text-color: #333;
+  --field-decorator-placeholder-color: #555; // placeholder颜色
+  --field-decorator-blur-color: var(--color-primary);
+
+  --field-decorator-standard-normal-margin-top: 26px;
+  --field-decorator-standard-small-margin-top: 26px;
+  --field-decorator-standard-normal-margin-bottom: 0;
+  --field-decorator-standard-small-margin-bottom: 0;
+  --field-decorator-placeholder-size: var(--font-size);
+  --field-decorator-icon-size: 18px;
+  --field-decorator-standard-normal-icon-margin-top: 22px;
+  --field-decorator-standard-small-icon-margin-top: 22px;
+  --field-decorator-standard-normal-icon-margin-bottom: 0;
+  --field-decorator-standard-small-icon-margin-bottom: 0;
+
+  --field-decorator-disabled-color: #313131; //disabled颜色
+
+
+  --input-input-font-size: var(--font-size);
+  --form-details-font-size: var(--font-size);
+  //--input-input-height: 26px;
+
+  --checkbox-action-padding: 0 3px;
+  --checkbox-icon-size: 20px;
+
+  --radio-action-padding: 0 3px;
+  --radio-icon-size: 20px;
+
+  --select-label-font-size: var(--font-size);
+  --option-height: 36px;
+  --option-font-size: var(--font-size);
+
+  --counter-input-width: 100%;
+
+  --tabs-radius: 0;
+  --tabs-background: #f7f8fa;
+  --tabs-item-horizontal-height: 40px;
+
+  --pagination-item-width: 30px;
+  --pagination-item-height: 30px;
+  --pagination-input-width: 30px;
+  --pagination-font-size: var(--font-size);
+
+  --paper-border-radius: 0;
+
+  --popup-content-background-color: var(--page-bg);
+
+}
+
