@@ -11,15 +11,13 @@ import { szdMsgBox } from "../../components/msgBox/msgBox";
 
 let ctx;
 
-const const_wfOper = {
+export const const_wfOper = {
   userId: "", //处理人
   bussId: "",
   bussDocId: "", //单据号
   routerCode: "", //业务路由
   bstp: "", //业务类型
   bstpName: "",
-  dyWfId: "",
-  option: "C", //C创建 U更改 V显示
   //工作流按钮
   wfBtn: {
     btn_check: "U",
@@ -31,6 +29,8 @@ const const_wfOper = {
     btn_atta: "",
     btn_image: "",
     btn_record: "",
+    btn_vch: "", //查看凭证
+    btn_revoke: "", //撤回
     btn_transfer: "",
     btn_meeting: "",
     btn_preAddSign: "",
@@ -43,11 +43,11 @@ const const_wfOper = {
     wfExt: "",
     wfExtBefore: "" //撤回时可能需要处理特殊逻辑
   },
-  wfFst: {}, //屏幕字段状态
+  wfBtnParam: {}, //参数设置
+  wfOper: { szdopt: "V" },
   wfDef: {}, //缺省值
-  wfOper: {
-    szdopt: "V"
-  }
+  wfInst: {}, //流程实例
+  wfAi: {} //AI参数
 };
 
 /**
@@ -61,12 +61,7 @@ export function init(routerCode, bstp = "") {
     let wfOper;
     //获取路由代码,关闭标签
     const routerObj = szdRouter.getRouterObj(routerCode);
-    if (!routerObj) {
-      szdRouter.closeFrameTag();
-      resolve(const_wfOper);
-      return;
-    }
-    if (routerObj.bstpCount === 0) {
+    if (!routerObj || routerObj.bstpCount === 0) {
       $m("CORE_CLIENT.E103", routerCode); //业务路由 & 未配置业务类型
       szdRouter.closeFrameTag();
       resolve(const_wfOper);

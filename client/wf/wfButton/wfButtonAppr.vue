@@ -60,7 +60,6 @@
             v-model="form.noticeUserIds"
             showHelp
             :help="{ a: 'CORE_USER', b: form, c: ['noticeUserIds-userId', 'noticeUserNames-userName'], f: 5, i: 'noticeUserIds-userId' }"
-            readonly
             clearable
             @change="handleChangeNoticeUserIds" />
           <szd-input label="@用户姓名" v-model="form.noticeUserNames" disabled />
@@ -72,23 +71,31 @@
       <div class="main-dialog-footer">
         <szd-button label="确定并关闭" type="primary" @click="okayForm(true)" />
         <szd-button label="确定" type="primary" @click="okayForm(false)" />
+        <szd-button label="设置抄送" type="primary" @click="handleSetCc" />
         <szd-button label="取消" type="primary" @click="closeForm" />
       </div>
     </template>
+    <!-- 抄送配置 -->
+    <wfButtonApprCc ref="refWfButtonApprCc" />
   </var-dialog>
 </template>
 
 <script setup>
   import { nextTick, ref } from "vue";
   import { $m, $t } from "../../common/utils/globalConfig";
+  import wfButtonApprCc from "./wfButtonApprCc.vue";
   //更新数据对象
   const emit = defineEmits(["okaySubmit"]);
+  //子屏幕
+  const refWfButtonApprCc = ref();
   //功能参数
   const dg = ref({
     title: $t("审批意见"),
     open: false,
     wfRejectReasonFlag: false,
-    rejectAct: false
+    rejectAct: false,
+    dailyMode: "A",
+    wfInst: {}
   });
   //表单参数
   const form = ref({
@@ -109,12 +116,16 @@
   });
 
   //接受并处理
-  const callWfDgAppr = (operate, btnParam = {}, bussId = "", wfRejectReasonFlag = false) => {
+  const callWfDgAppr = (operate, btnParam = {}, wfInst = {}, bussId = "", wfRejectReasonFlag = false) => {
     initData();
     form.value.operate = operate;
     form.value.bussId = bussId;
+    form.value.noticeUserIds = wfInst && wfInst.noticeUser && wfInst.noticeUser !== "" ? wfInst.noticeUser : "";
+    form.value.noticeUserNames = wfInst && wfInst.noticeUserName && wfInst.noticeUserName !== "" ? wfInst.noticeUserName : "";
     dg.value.wfRejectReasonFlag = wfRejectReasonFlag === true;
     dg.value.rejectAct = btnParam.rejectAct === true;
+    dg.value.dailyMode = wfInst && wfInst.dailyMode && wfInst.dailyMode !== "" ? wfInst.dailyMode : "A";
+    dg.value.wfInst = wfInst;
     if (btnParam && btnParam.comments) {
       form.value.comments = btnParam.comments;
     }
@@ -171,7 +182,11 @@
   //常用语赋值审批意见
   const changeComments = (v, res) => {
     if (res.sname) {
-      form.value.comments = form.value.comments + res.sname;
+      if (dg.value.dailyMode === "A") {
+        form.value.comments = res.sname;
+      } else {
+        form.value.comments = form.value.comments + res.sname;
+      }
     }
     form.value.dailyItem = "";
   };
@@ -180,6 +195,10 @@
     nextTick(() => {
       if (!form.value.noticeUserIds) form.value.noticeUserNames = "";
     });
+  };
+
+  const handleSetCc = () => {
+    refWfButtonApprCc.value.callWfButtonApprCc(dg.value.wfInst);
   };
 
   //初始化数据

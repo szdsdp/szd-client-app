@@ -3,9 +3,23 @@ import _ from "lodash";
 import { $t } from "../../../common/utils/globalConfig";
 import { setLayVar, setSelDataSortRule } from "./tableLayout";
 
-const const_type = ["string", "number", "boolean", "array", "date", "datetime", "time", "year", "month", "svg", "upload", "button"]; //数据类型
+const const_type = ["string", "number", "boolean", "array", "date", "datetime", "time", "year", "month", "svg", "hlt", "upload", "button"]; //数据类型
 const const_type_align_center = ["boolean", "date", "datetime", "time", "year", "month"]; //数据类型-居中
-const const_ctrlType = ["input", "input-number", "date", "time", "checkbox", "radio", "select", "textarea", "password", "svg", "upload", "button"]; //控件类型
+const const_ctrlType = [
+  "input",
+  "input-number",
+  "date",
+  "time",
+  "checkbox",
+  "radio",
+  "select",
+  "textarea",
+  "password",
+  "svg",
+  "hlt",
+  "upload",
+  "button"
+]; //控件类型
 //工具类默认按钮
 const const_btn_type = ["", "primary", "success", "warning", "danger", "info"];
 const const_toolbar_edit = ["$add", "$copy", "$del", "$uploadFold"];
@@ -121,9 +135,10 @@ function tableLayout(params, btnHide) {
     pagination: ["0", "1", "2"].includes(params.pagination) ? params.pagination : "2", //分页方式 0.不分页 1.前端分页 2.后端分页
     impTmpCode: params.impTmpCode, //导入模板代码
     impTmpName: params.impTmpName, //导入模板名称
-    exportExcelMode: ["0", "1", "2"].includes(params.exportExcelMode) ? params.exportExcelMode : "0", //导出Excel回调 0.不回调 1.绑定回调方法 2.绑定属性值方法
-    addRowMode: _.isBoolean(params.addRowMode) ? params.addRowMode : false, //新增行回调
+    exportExcelMode: ["0", "1", "2"].includes(params.exportExcelMode) ? params.exportExcelMode : "0", //导出Excel模式 0.不回调 1.绑定回调方法 2.绑定属性值方法
+    addRowMode: _.isBoolean(params.addRowMode) ? params.addRowMode : false, //新增行回调模式
     appShowMode: ["0", "1"].includes(params.appShowMode) ? params.appShowMode : "1", //APP显示模式 0.table模式 1.card模式
+    aiParam: params.aiParam || {}, //AI参数
     tableUKey: params.tableUKey || "", //table唯一标识
 
     //内部参数
@@ -307,6 +322,7 @@ function tableFCatItem(item, layout, parent) {
     numDot: item.type === "number" ? (_.isBoolean(item.numDot) ? item.numDot : true) : false, //千分位符
     numDec: item.type === "number" && !isNaN(item.numDec) ? item.numDec : undefined, //小数位位数
     noZero: item.type === "number" && _.isBoolean(item.noZero) ? item.noZero : false, //不输出0
+    isPk: _.isBoolean(item.isPk) ? item.isPk : false, //是否主键
     importSplit: item.importSplit, //数据导入分割符
     exportSplit: item.exportSplit, //数据导出分割符
     //列汇总 0.不汇总 1.合计 2.平均值 3.最小值 4.最大值 5.统计行数
@@ -367,12 +383,12 @@ function tableFCatItem(item, layout, parent) {
   }
 
   //点击事件
-  if (fCat.click && ["boolean", "array", "upload", "button"].includes(fCat.type)) {
+  if (fCat.click && ["boolean", "array", "hlt", "upload", "button"].includes(fCat.type)) {
     fCat.click = false;
   }
 
   //排序、合并、过滤设置，按钮不允许此操作
-  if (["array", "svg", "upload", "button"].includes(fCat.type)) {
+  if (["array", "svg", "hlt", "upload", "button"].includes(fCat.type)) {
     fCat.sort = false;
     fCat.merge = false;
     fCat.filter = false;
@@ -398,7 +414,7 @@ function tableFCatItem(item, layout, parent) {
   }
 
   //控件设置
-  if (fCat.ctrlType || fCat.edit || ["svg", "upload", "button"].includes(fCat.type)) {
+  if (fCat.ctrlType || fCat.edit || ["svg", "hlt", "upload", "button"].includes(fCat.type)) {
     setCtrl(fCat, item.ctrlParam);
   }
 
@@ -412,7 +428,7 @@ function tableFCatItem(item, layout, parent) {
 
 //控件及参数设置
 function setCtrl(fCat, ctrlParam) {
-  //控件类型 ["string", "number", "boolean", "array", "date", "datetime", "time", "year", "month", "svg", "upload", "button"]
+  //控件类型 ["string", "number", "boolean", "array", "date", "datetime", "time", "year", "month", "svg", "hlt", "upload", "button"]
   switch (fCat.type) {
     case "string":
       if (!["input", "radio", "select", "textarea", "password"].includes(fCat.ctrlType)) fCat.ctrlType = "input";
@@ -432,6 +448,9 @@ function setCtrl(fCat, ctrlParam) {
     case "svg":
       fCat.ctrlType = "svg";
       break;
+    case "hlt":
+      fCat.ctrlType = "hlt";
+      break;
     case "upload":
       fCat.ctrlType = "upload";
       break;
@@ -442,7 +461,7 @@ function setCtrl(fCat, ctrlParam) {
       fCat.ctrlType = "date";
       break;
   }
-  //控件参数 ["input", "input-number", "date", "time", "checkbox", "radio", "select", "textarea", "password", "svg", "upload", "button"];
+  //控件参数 ["input", "input-number", "date", "time", "checkbox", "radio", "select", "textarea", "password", "svg", "hlt", "upload", "button"];
   switch (fCat.ctrlType) {
     case "input":
       setCtrlInput(fCat, ctrlParam);
@@ -470,6 +489,9 @@ function setCtrl(fCat, ctrlParam) {
       break;
     case "svg":
       setCtrlSvg(fCat, ctrlParam);
+      break;
+    case "hlt":
+      setCtrlHlt(fCat, ctrlParam);
       break;
     case "upload":
       setCtrlUpload(fCat, ctrlParam);
@@ -646,6 +668,16 @@ function setCtrlSvg(fCat, ctrlParam) {
   };
 }
 
+//控件及参数设置 hlt
+function setCtrlHlt(fCat, ctrlParam) {
+  if (!ctrlParam) ctrlParam = {};
+  fCat.ctrlParam = {
+    label: ctrlParam.label, //显示标签
+    length: ctrlParam.length || 20, //显示长度
+    title: ctrlParam.title //显示标题
+  };
+}
+
 //控件及参数设置 upload
 function setCtrlUpload(fCat, ctrlParam) {
   if (!ctrlParam) ctrlParam = {};
@@ -803,7 +835,9 @@ function viewCatAddFCatMove(mainLayout, item) {
     numDot: item.type === "number" ? (_.isBoolean(item.numDot) ? item.numDot : true) : false, //千分位符
     numDec: item.type === "number" && !isNaN(item.numDec) ? item.numDec : undefined, //小数位位数
     noZero: item.type === "number" && _.isBoolean(item.noZero) ? item.noZero : false, //不输出0
+    isPk: _.isBoolean(item.isPk) ? item.isPk : false, //是否主键
     importSplit: item.importSplit, //数据导入分割符
+    exportSplit: item.exportSplit, //数据导出分割符
     //列汇总 0.不汇总 1.合计 2.平均值 3.最小值 4.最大值 5.统计行数
     doSum: ["0", "1", "2", "3", "4", "5"].includes(item.doSum) ? item.doSum : "0",
     //控件类型
@@ -843,7 +877,7 @@ function viewCatAddFCatMove(mainLayout, item) {
   }
 
   //控件设置
-  if (fCat.ctrlType || fCat.edit || ["svg", "upload", "button"].includes(fCat.type)) {
+  if (fCat.ctrlType || fCat.edit || ["svg", "hlt", "upload", "button"].includes(fCat.type)) {
     setCtrl(fCat, item.ctrlParam);
   }
 

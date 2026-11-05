@@ -1,6 +1,6 @@
 <template>
   <!-- 业务主体信息-通过按钮点击，标签模式  -->
-  <div class="wf-btn">
+  <div class="szd-wf-btn">
     <var-button-group type="default">
       <szd-button label="检查" type="primary" @click="emit('check')" :disabled="bussBase.delFlag" :szdopt="szdopt" />
       <szd-button label="保存" type="primary" @click="emit('submit')" :disabled="bussBase.delFlag" :szdopt="szdopt" />
@@ -11,14 +11,14 @@
 
     <div v-show="dg.btnMoreShow" class="var-popup__overlay" @click="handleMouseOut" style="z-index: 3099" />
 
-    <div v-show="dg.btnMoreShow" class="btn_more_view">
-      <div v-if="bussBase.pkVal && !bussBase.delFlag" class="btn_row">
-        <var-button type="primary" class="btn_more" @click="emit('delete')" :disabled="szdopt === 'V'">
+    <div v-show="dg.btnMoreShow" class="wf-btn_more_view">
+      <div v-if="bussBase.pkVal && !bussBase.delFlag" class="wf-btn_row">
+        <var-button type="primary" class="wf-btn_more" @click="emit('delete')" :disabled="szdopt === 'V'">
           {{ $t("删除") }}
         </var-button>
       </div>
-      <div v-if="bussBase.pkVal" class="btn_row">
-        <var-button type="primary" class="btn_more" @click="handleBussBase">
+      <div v-if="bussBase.pkVal" class="wf-btn_row">
+        <var-button type="primary" class="wf-btn_more" @click="handleBussBase">
           {{ $t("业务主体") }}
         </var-button>
       </div>

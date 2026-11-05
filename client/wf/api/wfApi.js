@@ -83,3 +83,21 @@ export function wfRemind(data) {
     data: data
   });
 }
+
+// 查询抄送人
+export function getWfCcUser(data) {
+  return request({
+    url: "/core/wf/fixed/node/cc/person",
+    method: "post",
+    data: data
+  });
+}
+
+// 保存抄送人
+export function saveWfCcUser(data) {
+  return request({
+    url: "/core/wf/fixed/node/cc/person/save",
+    method: "post",
+    data: data
+  });
+}

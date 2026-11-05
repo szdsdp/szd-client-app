@@ -9,7 +9,16 @@ export function toolCheckAuth(data) {
   });
 }
 
-// 全局参数
+// 全局参数-列表
+export function toolGetGlobalList(data) {
+  return request({
+    url: "/core/common/tool/global/list",
+    method: "post",
+    data: data
+  });
+}
+
+// 全局参数-键值对象
 export function toolGetGlobalParam(data) {
   return request({
     url: "/core/common/tool/global/param",

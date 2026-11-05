@@ -165,11 +165,15 @@ function ssoLoginBind(urlQuery, next, isBind) {
 //单点登录重新定向
 function ssoLoginRedirect(urlQuery, next) {
   const routerCode = urlQuery.routerCode;
-  const routerObj = szdRouter.getRouterObj(routerCode);
-  if (routerObj) {
-    szdRouter.goNav(routerCode, urlQuery.params);
-  } else {
+  if (!routerCode) {
     next({ path: "/" });
+  } else {
+    const routerObj = szdRouter.getRouterObj(routerCode);
+    if (routerObj) {
+      szdRouter.goNav(routerCode, urlQuery.params);
+    } else {
+      next({ path: "/" });
+    }
   }
 }
 

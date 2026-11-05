@@ -2,7 +2,7 @@ import szdRouter from "../utils/goRouter";
 import { range } from "./range";
 import { lockOff, lockOn } from "./lock";
 import { $t } from "../utils/globalConfig";
-import { toolCheckAuth, toolGetGlobalParam } from "../api/tool";
+import { toolCheckAuth, toolGetGlobalList, toolGetGlobalParam } from "../api/tool";
 
 /**
  * 根据权限对象和权限字段值 检查是否具有对应数据权限
@@ -14,6 +14,19 @@ function checkAuth(authObjCode, authVal = "") {
   return new Promise(resolve => {
     toolCheckAuth({ authObjCode: authObjCode, authVal: authVal }).then(auth => {
       resolve(auth);
+    });
+  });
+}
+
+/**
+ * 获取全局参数-列表
+ * @param {String}  configType 全局参数-配置类
+ * @return {Promise} [{参数键值、参数名、参数值、参数排序、备注}]
+ */
+function getGlobalList(configType) {
+  return new Promise(resolve => {
+    toolGetGlobalList({ configType: configType }).then(resConfig => {
+      resolve(resConfig);
     });
   });
 }
@@ -97,6 +110,7 @@ async function getPaste() {
  */
 function getTitle(option) {
   if (option === "C") return $t("新增");
+  if (option === "CP") return $t("复制");
   if (option === "U") return $t("更改");
   if (option === "V") return $t("显示");
   return "";
@@ -142,6 +156,38 @@ function convertStrToArr(value, split = ",", trim = true) {
 }
 
 /**
+ * 判断是否json字符串
+ * @param {String} val
+ * @return {Boolean}
+ */
+function isJson(val) {
+  try {
+    const result = JSON.parse(val);
+    return typeof result === "object" && result !== null && result !== undefined;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * 获得下一个行号
+ * @param {Array} arr 表数据
+ * @param {String} field 行号字段
+ * @param {Number} step 累加步长
+ * @return {Number}
+ */
+function getNextItemNo(arr, field = "itemNo", step = 10) {
+  let maxNo = step;
+  if (arr && Array.isArray(arr) && arr.length > 0) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][field] && arr[i][field] > maxNo) maxNo = arr[i][field];
+    }
+    maxNo = Math.floor((maxNo + step) / step) * step;
+  }
+  return maxNo;
+}
+
+/**
  * 帮助文档
  * @param {String} docId 帮助文档id 命名规则：建议路由代码+表+字段 或 表+字段
  * @param {String} docName 帮助文档名称
@@ -154,6 +200,7 @@ function helpDoc(docId, docName = "", docIdDisabled = false) {
 const szdTool = {
   range,
   checkAuth,
+  getGlobalList,
   getGlobalParam,
   getTree,
   getCascader,
@@ -161,6 +208,8 @@ const szdTool = {
   getTitle,
   toCamelCase,
   convertStrToArr,
+  isJson,
+  getNextItemNo,
   helpDoc,
   lockOn,
   lockOff

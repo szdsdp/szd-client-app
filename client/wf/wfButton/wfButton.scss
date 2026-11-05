@@ -1,4 +1,4 @@
-.wf-btn {
+.szd-wf-btn {
   display: flex;
   justify-content: flex-end;
   padding-right: 5px;
@@ -7,11 +7,11 @@
   height: var(--button-normal-height);
 
 
-  .btn_more {
+  .wf-btn_more {
     width: 80px;
   }
 
-  .btn_more_view {
+  .wf-btn_more_view {
     display: flex;
     flex-direction: column;
     width: auto;
@@ -24,12 +24,10 @@
     overflow: auto;
   }
 
-  .btn_row {
+  .wf-btn_row {
     margin-bottom: 5px;
     display: flex;
     justify-content: flex-end;
-
   }
-
 }
 
